@@ -1,13 +1,38 @@
-// 1) create classes
-// 2) create function within classes
-// 3) create element in DOM
-
 class Game {
+  constructor() {
+    this.obstaclesArr = [];
+    this.timer = 0;
+  }
   start() {
-    this.player = new Player(); // create a new instance of your class Player
-    this.player.domElement = this.createDomElm(this.player); // create DOM element: HTML element of "player" for the UI
+    // create player
+    this.player = new Player(); //create an instance of the Player
+    this.player.domElement = this.createDomElm(this.player); //create DOM element for the player
     this.drawDomElm(this.player);
-    this.addEventListeners(); // detect arrow functions
+
+    this.addEventListeners();
+
+    setInterval(() => {
+      this.timer++;
+
+      // 0 --> true
+      // 1 --> false
+      // 2 --> false
+      // 3 --> true 3/3=0
+      // 4 --> false
+
+      if (this.timer % 3 === 0) {
+        // create obstacle
+        const newObstacle = new Obstacle();
+        this.obstaclesArr.push(newObstacle);
+        newObstacle.domElement = this.createDomElm(newObstacle);
+        this.drawDomElm(newObstacle);
+      }
+      //move all obstacles in obstaclesArr
+      this.obstaclesArr.forEach((elm) => {
+        elm.moveDown();
+        this.drawDomElm(elm);
+      });
+    }, 500);
   }
 
   addEventListeners() {
@@ -21,27 +46,18 @@ class Game {
     });
   }
 
-  // creating this method allows us to have this element in the UI and then to access it in the html file
   createDomElm(instance) {
-    const htmlTag = document.createElement("div");
-    // create htmlTag
-    htmlTag.className = instance.className;
-    // add class (so that we can reuse this function to create different types of elements in the dom, eg. player, obstacles....)
+    const htmlTag = document.createElement("div"); // create html element (not added to the dom yet)
+    htmlTag.className = instance.className; // add class (so that we can reuse this function to create different types of elements in the dom, eg. player, obstacles....)
     htmlTag.style.width = instance.width + "vw";
     htmlTag.style.height = instance.height + "vh";
-
-    const board = document.getElementById("board");
-    // get a reference to the parent container
-    // get the element where the new htmlTag should be added to
-    board.appendChild(htmlTag);
-    // append the element to the dom
-
+    const board = document.getElementById("board"); // get a reference to the parent container
+    board.appendChild(htmlTag); // append the element to the dom
     return htmlTag;
   }
-
   drawDomElm(instance) {
-    instance.domElement.style.left = instance.positionX + "vw"; //wil change throughout game
-    instance.domElement.style.bottom = instance.positionY + "vh"; //wil change throughout game, each time we press key
+    instance.domElement.style.left = instance.positionX + "vw";
+    instance.domElement.style.bottom = instance.positionY + "vh";
   }
 }
 
@@ -50,23 +66,34 @@ class Player {
     this.className = "player";
     this.positionX = 0;
     this.positionY = 0;
-    this.width = 10; // 10 % of board width
+    this.width = 10;
     this.height = 10;
     this.domElement = null;
   }
-
   moveLeft() {
     this.positionX -= 10;
-    console.log("moving left - current position: " + this.positionX);
+    console.log("moving left.... current poistion: " + this.positionX);
   }
-
   moveRight() {
     this.positionX += 10;
-    console.log("moving right - current position: " + this.positionX);
+    console.log("moving right.... current poistion: " + this.positionX);
+  }
+}
+
+class Obstacle {
+  constructor() {
+    this.className = "obstacle";
+    this.positionX = 45;
+    this.positionY = 90;
+    this.width = 10;
+    this.height = 10;
+    this.domElement = null;
+  }
+  moveDown() {
+    this.positionY -= 10;
+    console.log("moving down.... current poistion: " + this.positionX);
   }
 }
 
 const game = new Game();
 game.start();
-
-// 3) create event logics
