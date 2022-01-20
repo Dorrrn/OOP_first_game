@@ -40,8 +40,8 @@ class Game {
   }
 
   drawDomElm(instance) {
-    this.htmlTag.style.left = instance.positionX + "vw"; //wil change throughout game
-    this.htmlTag.style.bottom = instance.positionY + "vh"; //wil change throughout game, each time we press key
+    instance.domElement.style.left = instance.positionX + "vw"; //wil change throughout game
+    instance.domElement.style.bottom = instance.positionY + "vh"; //wil change throughout game, each time we press key
   }
 }
 
