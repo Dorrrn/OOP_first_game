@@ -1,20 +1,26 @@
+MVP
+[x] Iteration 1: player moving right/left and displayed on screen
+[ ] Iteration 2: obstacle moving down (in center of screen)
+-- class obstacle
+-- array of obstacles --> obstaclesArr
+-- how many? when? --> interval
+-- movement of obstacles
 
-MVP (goal today 5PM)
-- player moving right/left and displayed on screen --> Iteration 1
-- obstacle moving down
-- obstacle created in random position
-- collision detection
-- border
+-- border (player & obstacles)
 
+[ ] Iteration 3: collision detection
+[ ] Iteration 4: obstacles created in random horizontal position
+[ ] Iteration 5: border (player, obstacles)
 
 Game
+
 - obstacles
 - background image
 - limits
 - generateObstacle()
 
-
 Player
+
 - position x
 - moveLeft()
 - moveRight()
@@ -23,14 +29,15 @@ Player
 - [lives / health]
 - [speed]
 
-
 Obstacle
+
 - [image]
 - position
+- domElement
 - moveDown()
 
-
 Improvements
+
 - start button
 - score / levels
 - ux / images / sound
@@ -38,11 +45,5 @@ Improvements
 - lives / health
 - prices (eg. extra lives)
 - player moving up/down
-
-
-
-
-
-
 
 const obstacle1 = new Obstacle(position);
