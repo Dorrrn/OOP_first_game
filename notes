@@ -1,0 +1,48 @@
+
+MVP (goal today 5PM)
+- player moving right/left and displayed on screen --> Iteration 1
+- obstacle moving down
+- obstacle created in random position
+- collision detection
+- border
+
+
+Game
+- obstacles
+- background image
+- limits
+- generateObstacle()
+
+
+Player
+- position x
+- moveLeft()
+- moveRight()
+- [name]
+- [image]
+- [lives / health]
+- [speed]
+
+
+Obstacle
+- [image]
+- position
+- moveDown()
+
+
+Improvements
+- start button
+- score / levels
+- ux / images / sound
+- shooting
+- lives / health
+- prices (eg. extra lives)
+- player moving up/down
+
+
+
+
+
+
+
+const obstacle1 = new Obstacle(position);
