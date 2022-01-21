@@ -20,12 +20,14 @@ class Game {
         this.obstaclesArr.push(newObstacle);
         newObstacle.domElement = this.createDomElm(newObstacle);
         this.drawDomElm(newObstacle);
+        //console.log(newObstacle.domElement);
       }
       //move all obstacles in obstaclesArr
       this.obstaclesArr.forEach((elm) => {
         elm.moveDown();
         this.drawDomElm(elm);
         this.collision(this.player, elm);
+        elm.removeObstacle(elm);
       });
     }, 500);
   }
@@ -59,7 +61,6 @@ class Game {
     if (
       instance1.positionX < instance2.positionX + instance2.width &&
       instance1.positionY < instance2.positionY + instance2.height &&
-      
       instance2.positionX < instance1.positionX + instance1.width &&
       instance2.positionY < instance1.positionY + instance1.height
     ) {
@@ -100,6 +101,11 @@ class Obstacle {
   moveDown() {
     this.positionY -= 10;
     //console.log("moving down.... current poistion: " + this.positionX);
+  }
+  removeObstacle(arr, elm) {
+    if (elm.positionY < 0) {
+      elm.domElement.remove();
+    }
   }
 }
 
