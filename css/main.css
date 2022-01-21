@@ -4,16 +4,16 @@ body {
 }
 
 #board {
-  background-color: #8bc6ec;
+  background-color: burlywood;
   height: 100vh;
 }
 
 .player {
-  background-color: crimson;
+  background-color: purple;
   position: absolute;
 }
 
 .obstacle {
-  background-color: green;
+  background-color: teal;
   position: absolute;
 }
