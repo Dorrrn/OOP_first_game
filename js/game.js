@@ -13,13 +13,7 @@ class Game {
 
     setInterval(() => {
       this.timer++;
-
-      // 0 --> true
-      // 1 --> false
-      // 2 --> false
-      // 3 --> true 3/3=0
-      // 4 --> false
-
+      // 0,3,6,9,... -->true // 1,2,4,5,7,... -->false
       if (this.timer % 3 === 0) {
         // create obstacle
         const newObstacle = new Obstacle();
@@ -31,6 +25,7 @@ class Game {
       this.obstaclesArr.forEach((elm) => {
         elm.moveDown();
         this.drawDomElm(elm);
+        this.collision(this.player, elm);
       });
     }, 500);
   }
@@ -59,6 +54,19 @@ class Game {
     instance.domElement.style.left = instance.positionX + "vw";
     instance.domElement.style.bottom = instance.positionY + "vh";
   }
+
+  collision(instance1, instance2) {
+    if (
+      instance1.positionX < instance2.positionX + instance2.width &&
+      instance1.positionY < instance2.positionY + instance2.height &&
+      
+      instance2.positionX < instance1.positionX + instance1.width &&
+      instance2.positionY < instance1.positionY + instance1.height
+    ) {
+      console.log("game over");
+      document.querySelector(".player").style.backgroundColor = "black";
+    }
+  }
 }
 
 class Player {
@@ -83,7 +91,7 @@ class Player {
 class Obstacle {
   constructor() {
     this.className = "obstacle";
-    this.positionX = 45;
+    this.positionX = Math.random() * 100; //Math.random() * (max - min) + min
     this.positionY = 100;
     this.width = 10;
     this.height = 10;
@@ -91,7 +99,7 @@ class Obstacle {
   }
   moveDown() {
     this.positionY -= 10;
-    console.log("moving down.... current poistion: " + this.positionX);
+    //console.log("moving down.... current poistion: " + this.positionX);
   }
 }
 
